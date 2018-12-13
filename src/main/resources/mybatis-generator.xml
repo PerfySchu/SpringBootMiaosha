@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <!--数据库连接地址账号密码-->
@@ -40,8 +40,10 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="user_info" domainObjectName="UserDO"></table>
-        <table tableName="user_password" domainObjectName="UserPasswordDO"></table>
+        <table tableName="user_info" domainObjectName="UserDO" enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="user_password" domainObjectName="UserPasswordDO" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
         <!--<table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >-->
             <!--<property name="useActualColumnNames" value="true"/>-->
