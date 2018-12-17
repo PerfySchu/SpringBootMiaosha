@@ -1,5 +1,6 @@
 package com.miaoshaproject.service.impl;
 
+import com.miaoshaproject.controller.viewobject.UserVO;
 import com.miaoshaproject.dao.UserDOMapper;
 import com.miaoshaproject.dao.UserPasswordDOMapper;
 import com.miaoshaproject.dataobject.UserDO;
@@ -11,6 +12,7 @@ import com.miaoshaproject.service.model.UserModel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +57,13 @@ public class UserServiceImpl implements UserService {
 
         //实现model 转 DataObject 方法
         UserDO userDO = convertFromModel(userModel);
-        userDOMapper.insertSelective(userDO);
+        try {
+            userDOMapper.insertSelective(userDO);
+        }catch (DuplicateKeyException ex){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "该手机号已注册");
+        }
+        //获取数据库自增id，赋值给model
+        userModel.setId(userDO.getId());
 
         UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);
         userPasswordDOMapper.insertSelective(userPasswordDO);
@@ -90,6 +98,24 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDO, userModel);
         if(userPasswordDO != null){
             userModel.setEncryptPassword(userPasswordDO.getEncryptPassword());
+        }
+
+        return userModel;
+    }
+
+    @Override
+    public UserModel validateLogin(String telephone, String encryptPassword) throws BusinessException {
+        //通过用户手机号获取用户信息
+        UserDO userDO = userDOMapper.selectByTelephone(telephone);
+        if(userDO == null){
+            throw new BusinessException(EmBusinessError.USRE_LOGIN_FAIL);
+        }
+        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
+        UserModel userModel = covertFromDataObject(userDO, userPasswordDO);
+
+        //比对密码是否匹配
+        if(!StringUtils.equals(encryptPassword, userModel.getEncryptPassword())){
+            throw new BusinessException(EmBusinessError.USRE_LOGIN_FAIL);
         }
 
         return userModel;
