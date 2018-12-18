@@ -52,12 +52,7 @@ public class UserServiceImpl implements UserService {
         if(userModel == null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-//        if(StringUtils.isEmpty(userModel.getName())
-//                ||userModel.getGender() == null
-//                ||userModel.getAge() == null
-//                ||StringUtils.isEmpty(userModel.getTelephone())){
-//            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
-//        }
+
         ValidationResult result=validator.validate(userModel);
         if(result.isHasError()){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,result.getErrMsg());
