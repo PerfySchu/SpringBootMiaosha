@@ -134,7 +134,7 @@
                 <verbose>true</verbose>
 
                 <!--允许自动覆盖文件-->
-                <overwrite>true</overwrite>
+                <overwrite>false</overwrite>
 
                 <!--mybatis-generator配置文件路径-->
                 <configurationFile>
