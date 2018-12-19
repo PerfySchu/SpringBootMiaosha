@@ -51,7 +51,7 @@
     delete from user_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.miaoshaproject.dataobject.UserDO">
+  <insert id="insert" parameterType="com.miaoshaproject.dataobject.UserDO" keyProperty="id" useGeneratedKeys="true">
     insert into user_info (id, name, gender, 
       age, telephone, register_mode, 
       third_party_id)
