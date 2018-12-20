@@ -1,5 +1,8 @@
 package com.miaoshaproject.service;
 
+import com.miaoshaproject.error.BusinessException;
+import com.miaoshaproject.service.model.OrderModel;
+
 /**
  * @ClassName OrderService
  * @Author PerfySchu
@@ -7,4 +10,5 @@ package com.miaoshaproject.service;
  * @Version 1.0
  **/
 public interface OrderService {
+    OrderModel createOrder(Integer userId, Integer itemId, Integer amount) throws BusinessException;
 }

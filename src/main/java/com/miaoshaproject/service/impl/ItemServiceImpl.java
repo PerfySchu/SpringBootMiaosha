@@ -7,7 +7,9 @@ import com.miaoshaproject.dataobject.ItemStockDO;
 import com.miaoshaproject.error.BusinessException;
 import com.miaoshaproject.error.EmBusinessError;
 import com.miaoshaproject.service.ItemService;
+import com.miaoshaproject.service.PromoService;
 import com.miaoshaproject.service.model.ItemModel;
+import com.miaoshaproject.service.model.PromoModel;
 import com.miaoshaproject.validator.ValidationResult;
 import com.miaoshaproject.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
@@ -34,6 +36,8 @@ public class ItemServiceImpl implements ItemService {
     private ItemDOMapper itemDOMapper;
     @Autowired
     private ItemStockDOMapper itemStockDOMapper;
+    @Autowired
+    private PromoService promoService;
 
     @Override
     @Transactional
@@ -82,7 +86,32 @@ public class ItemServiceImpl implements ItemService {
         //将dataObject 转成 Model
         ItemModel itemModel = this.convertModelFromDataObject(itemDO,itemStockDO);
 
+        //获取活动商品信息
+        PromoModel promoModel = promoService.getPromoByItemId(itemModel.getId());
+        if(promoModel != null && promoModel.getStatus().intValue() != 3){
+            itemModel.setPromoModel(promoModel);
+        }
+
         return itemModel;
+    }
+
+    @Override
+    @Transactional
+    public boolean decreaseStock(Integer itemId, Integer amount) {
+        //获取影响行数，一次判断是否修改库存成功
+        int affectedRow = itemStockDOMapper.decreaseStock(itemId, amount);
+        if(affectedRow > 0){
+            //更新库存成功
+            return true;
+        }
+        //更新库存失败
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public void increaseSales(Integer itemId, Integer amount) {
+        itemDOMapper.increaseSales(itemId, amount);
     }
 
     private ItemDO convertItemDOFromItemModel(ItemModel itemModel){

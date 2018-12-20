@@ -1,5 +1,7 @@
 package com.miaoshaproject.service;
 
+import com.miaoshaproject.service.model.PromoModel;
+
 /**
  * @ClassName PromoService
  * @Author PerfySchu
@@ -7,4 +9,6 @@ package com.miaoshaproject.service;
  * @Version 1.0
  **/
 public interface PromoService {
+
+    PromoModel getPromoByItemId(Integer itemId);
 }
