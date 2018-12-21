@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 20/12/2018 21:17:33
+ Date: 21/12/2018 10:26:11
 */
 
 SET NAMES utf8mb4;
@@ -34,8 +34,8 @@ CREATE TABLE `item`  (
 -- ----------------------------
 -- Records of item
 -- ----------------------------
-INSERT INTO `item` VALUES (1, '阳阳光', 520.00, '哈哈哈', 123, 'https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=2169047760,1992113630&fm=85&s=79B20DD5C043FEE73924156B0300B053');
-INSERT INTO `item` VALUES (2, 'MEIZU pro7', 2780.00, '双瞳如小窗，佳景观历历', 657, 'https://2c.zol-img.com.cn/product/184_320x240/470/ceb97iCfwAY.jpg');
+INSERT INTO `item` VALUES (1, '啊啊啊', 520.00, '哈哈哈', 123, 'https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=2169047760,1992113630&fm=85&s=79B20DD5C043FEE73924156B0300B053');
+INSERT INTO `item` VALUES (2, 'MEIZU pro7', 2780.00, '双瞳如小窗，佳景观历历', 660, 'https://2c.zol-img.com.cn/product/184_320x240/470/ceb97iCfwAY.jpg');
 
 -- ----------------------------
 -- Table structure for item_stock
@@ -51,8 +51,8 @@ CREATE TABLE `item_stock`  (
 -- ----------------------------
 -- Records of item_stock
 -- ----------------------------
-INSERT INTO `item_stock` VALUES (1, 0, 1);
-INSERT INTO `item_stock` VALUES (2, 93, 2);
+INSERT INTO `item_stock` VALUES (1, 10, 1);
+INSERT INTO `item_stock` VALUES (2, 90, 2);
 
 -- ----------------------------
 -- Table structure for order_info
@@ -65,20 +65,24 @@ CREATE TABLE `order_info`  (
   `item_price` double(10, 2) NOT NULL DEFAULT 0.00,
   `amount` int(11) NOT NULL DEFAULT 0,
   `order_price` double(10, 2) NOT NULL DEFAULT 0.00,
+  `promo_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES ('2018122000000000', 14, 1, 520.00, 1, 520.00);
-INSERT INTO `order_info` VALUES ('2018122000000100', 14, 2, 2780.00, 1, 2780.00);
-INSERT INTO `order_info` VALUES ('2018122000000200', 14, 2, 2780.00, 1, 2780.00);
-INSERT INTO `order_info` VALUES ('2018122000000300', 14, 2, 2780.00, 1, 2780.00);
-INSERT INTO `order_info` VALUES ('2018122000000400', 14, 2, 2780.00, 1, 2780.00);
-INSERT INTO `order_info` VALUES ('2018122000000500', 14, 2, 2780.00, 1, 2780.00);
-INSERT INTO `order_info` VALUES ('2018122000000600', 14, 2, 2780.00, 1, 2780.00);
-INSERT INTO `order_info` VALUES ('2018122000000700', 14, 2, 2780.00, 1, 2780.00);
+INSERT INTO `order_info` VALUES ('2018122000000000', 14, 1, 520.00, 1, 520.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000100', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000200', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000300', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000400', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000500', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000600', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122000000700', 14, 2, 2780.00, 1, 2780.00, 0);
+INSERT INTO `order_info` VALUES ('2018122100000800', 14, 1, 1.00, 1, 1.00, 0);
+INSERT INTO `order_info` VALUES ('2018122100000900', 14, 1, 1.00, 1, 1.00, 0);
+INSERT INTO `order_info` VALUES ('2018122100001000', 14, 2, 1.00, 1, 1.00, 1);
 
 -- ----------------------------
 -- Table structure for promo
@@ -113,7 +117,7 @@ CREATE TABLE `sequence_info`  (
 -- ----------------------------
 -- Records of sequence_info
 -- ----------------------------
-INSERT INTO `sequence_info` VALUES ('order_info', 8, 1);
+INSERT INTO `sequence_info` VALUES ('order_info', 11, 1);
 
 -- ----------------------------
 -- Table structure for user_info
@@ -134,7 +138,7 @@ CREATE TABLE `user_info`  (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES (14, '苏凝汐', 1, 23, '15527186096', 'byphone', '');
+INSERT INTO `user_info` VALUES (14, '苏苏苏', 1, 23, '15512345678', 'byphone', '');
 
 -- ----------------------------
 -- Table structure for user_password
