@@ -44,7 +44,7 @@
                     success:function(data){
                         if(data.status=="success"){
                             alert("otp短信已发送至您的手机，请注意查收！");
-                            window.location.href="file:///C:/Users/PerfySchu/Desktop/html/register.html"
+                            window.location.href="register.html"
                         }else{
                             alert("otp短信发送失败【" + data.data.errMsg +"]");
                         }
